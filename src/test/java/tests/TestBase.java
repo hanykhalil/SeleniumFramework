@@ -1,5 +1,6 @@
 package tests;
 
+
 import java.util.HashMap;
 
 import org.openqa.selenium.WebDriver;
@@ -7,6 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -52,8 +54,23 @@ public class TestBase extends AbstractTestNGCucumberTests{
 			 System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir")+"//drivers//geckodriver.exe");
 				driver=  new FirefoxDriver(firfoxOption());
 		}
-		driver.navigate().to("https://demo.nopcommerce.com");
-		driver.manage().window().maximize();
+		 
+		 // add headless phantomJs Driver
+		 else if (browserName.equalsIgnoreCase("headless")) {
+			    System.setProperty("phantomjs.binary.path",System.getProperty("user.dir")+"\\drivers\\phantomjs.exe");
+			    driver = new PhantomJSDriver();
+		}
+		 
+		// add headless ChromeDriver
+				 else if (browserName.equalsIgnoreCase("headless-chrome")) {
+					    System.setProperty("webdriver.chrome.driver",System.getProperty("user.dir")+"\\drivers\\chromedriver.exe");
+					    ChromeOptions optionHeadless= new ChromeOptions();
+					    optionHeadless.addArguments("--headless");
+					    optionHeadless.addArguments("--window-size=1920,1080");
+					    driver= new ChromeDriver(optionHeadless);
+				}
+				driver.navigate().to("https://demo.nopcommerce.com");
+				driver.manage().window().maximize();
 	}
 	
 	
