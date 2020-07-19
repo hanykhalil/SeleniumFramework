@@ -10,7 +10,7 @@ import pages.HomePage;
 import pages.LoginPage;
 import pages.UserRegisterationPage;
 
-public class UserRegisteredTest2 extends TestBase {
+public class UserRegisteredTestWithJavaFaker extends TestBase {
 
 	HomePage homeObject;
 	UserRegisterationPage registerObject;
